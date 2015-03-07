@@ -1,4 +1,4 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+#  [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Build Status][travis-image]][travis-url] [![Code Climate][cc-image]][cc-url]
 
 > Sets config.xml version and build number from package.json
 
@@ -52,3 +52,6 @@ MIT © [Carlos Antonio](http://carlosanton.io/)
 [travis-url]: https://travis-ci.org/disusered/cordova-version
 [daviddm-image]: https://david-dm.org/disusered/cordova-version.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/disusered/cordova-version
+[cc-image]: https://codeclimate.com/github/disusered/cordova-version/badges/gpa.svg
+[cc-url]: https://codeclimate.com/github/disusered/cordova-version
+
