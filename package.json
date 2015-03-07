@@ -24,7 +24,8 @@
     "phonegap"
   ],
   "dependencies": {
-    "meow": "^3.1.0"
+    "meow": "^3.1.0",
+    "q": "^1.2.0"
   },
   "devDependencies": {
     "grunt-cli": "^0.1.13",
