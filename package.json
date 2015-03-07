@@ -1,0 +1,45 @@
+{
+  "name": "cordova-version",
+  "version": "0.0.0",
+  "description": "Sets config.xml version and build number from package.json",
+  "homepage": "https://github.com/disusered/cordova-version",
+  "author": {
+    "name": "Carlos Antonio",
+    "email": "crosquillas@gmail.com",
+    "url": "http://carlosanton.io/"
+  },
+  "repository": "disusered/cordova-version",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+    "cordova-version",
+    "cordova",
+    "version",
+    "build",
+    "cordova-android",
+    "cordova-ios",
+    "phonegap"
+  ],
+  "dependencies": {
+    "meow": "^3.1.0"
+  },
+  "devDependencies": {
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-jshint": "^0.11.0",
+    "grunt-contrib-nodeunit": "^0.4.1",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-mocha-cli": "^1.12.0",
+    "jshint-stylish": "^1.0.1",
+    "load-grunt-tasks": "^3.1.0",
+    "time-grunt": "^1.1.0"
+  },
+  "scripts": {
+    "test": "grunt"
+  },
+  "bin": {
+    "cordova-version": "cli.js"
+  }
+}
