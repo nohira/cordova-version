@@ -5,11 +5,12 @@ var cordovaVersion = require('./');
 
 var cli = meow({
   help: [
-    'Usage',
-    '  cordova-version <input>',
+    'Requirements',
+    '  - Cordova\'s config.xml file must exist in the root folder',
+    '  - Version number must follow semantic versioning standards',
     '',
-    'Example',
-    '  cordova-version Unicorn'
+    'Usage',
+    '  cordova-version'
   ].join('\n')
 });
 
