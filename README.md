@@ -2,25 +2,39 @@
 
 > Sets config.xml version and build number from package.json
 
-
 ## Install
-
 ```sh
-$ npm install --save cordova-version
+$ npm install --save-dev cordova-version
 ```
-
 
 ## Usage
+### Automated
+```javascript
+// my-version-hook.js
+var version = require('cordova-version');
 
-```js
-var cordovaVersion = require('cordova-version');
+module.exports = function(context) {
+  var Q   = context.requireCordovaModule('q');
+  var dfd = new Q.defer();
 
-cordovaVersion('Rainbow');
+  version().then(function() {
+    dfd.resolve();
+    console.log('Version and build number updated.');
+  });
+
+  return dfd.promise;
+};
 ```
 
+```xml
+<!-- config.xml -->
+<hook src="my-version-hook.js" type="after_platform_add" />
+```
+
+### Manual
 ```sh
 $ npm install --global cordova-version
-$ cordova-version --help
+$ cordova-version
 ```
 
 
