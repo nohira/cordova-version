@@ -8,7 +8,7 @@ $ npm install --save-dev cordova-version
 ```
 
 ## Usage
-### Automated
+### Hook
 ```javascript
 // my-version-hook.js
 var version = require('cordova-version');
@@ -28,18 +28,21 @@ module.exports = function(context) {
 
 ```xml
 <!-- config.xml -->
-<hook src="my-version-hook.js" type="after_platform_add" />
+<hook src="my-version-hook.js" type="before_prepare" />
 ```
 
 ### Manual
 ```sh
 $ npm install --global cordova-version
-$ cordova-version
+$ cordova-version --help
 ```
+
+## Requirements
+- [Semantic Versioning](http://semver.org/) version and build number
+- Cordova's config.xml file must exist in the root folder
 
 
 ## License
-
 MIT © [Carlos Antonio](http://carlosanton.io/)
 
 
