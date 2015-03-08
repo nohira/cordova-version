@@ -43,6 +43,11 @@ module.exports = function (context) {
         try {
           modified.widget.$['version'] = pkg.version;
 
+          if (pkg.build) {
+            modified.widget.$['android-versionCode'] = pkg.build;
+            modified.widget.$['ios-CFBundleVersion'] = pkg.build;
+          }
+
           output = builder.buildObject(modified);
           fs.writeFile(path, output, callback);
         } catch (error) {
