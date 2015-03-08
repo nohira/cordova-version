@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 var meow = require('meow');
-var cordovaVersion = require('./');
+var version = require('./');
 
 var cli = meow({
   help: [
@@ -14,7 +14,7 @@ var cli = meow({
   ].join('\n')
 });
 
-cordovaVersion(cli.input[0])
+version.update(cli.input[0])
   .then(function(message) {
     process.stdout.write(message);
   })

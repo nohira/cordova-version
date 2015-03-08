@@ -3,8 +3,9 @@
 var fs     = require('fs');
 var xml2js = require('xml2js');
 var npmQ   = require('q');
+var semver = require('semver-utils');
 
-module.exports = function (context) {
+function updateVersion(context) {
   var Q = context ? context.requireCordovaModule('q') : npmQ;
   var dfd     = new Q.defer();
   var parser  = new xml2js.Parser();
@@ -12,14 +13,14 @@ module.exports = function (context) {
 
   var output;
   var dir;
-  var pkg;
   var path;
+  var pkg;
 
   var manifestExists = false;
 
   try {
     dir = context ? context.opts.projectRoot : process.cwd();
-    pkg = require(dir + '/package.json');
+    pkg = semver.parse(require(dir + '/package.json').version);
     path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
@@ -30,6 +31,7 @@ module.exports = function (context) {
     fs.readFile(path, function(err, data) {
       parser.parseString(data, function(err, result) {
         var modified = result;
+        var build;
 
         function callback(err) {
           if (err) {
@@ -41,6 +43,12 @@ module.exports = function (context) {
 
         try {
           modified.widget.$['version'] = pkg.version;
+
+          if (pkg.build) {
+            build = pkg.build.replace(/\D/g,'');
+            modified.widget.$['android-versionCode'] = build;
+            modified.widget.$['ios-CFBundleVersion'] = build;
+          }
 
           output = builder.buildObject(modified);
           fs.writeFile(path, output, callback);
@@ -54,4 +62,8 @@ module.exports = function (context) {
   }
 
   return dfd.promise;
+}
+
+module.exports = {
+  update: updateVersion
 };
