@@ -3,6 +3,7 @@
 var fs     = require('fs');
 var xml2js = require('xml2js');
 var npmQ   = require('q');
+var semver = require('semver-utils');
 
 module.exports = function (context) {
   var Q = context ? context.requireCordovaModule('q') : npmQ;
@@ -12,14 +13,14 @@ module.exports = function (context) {
 
   var output;
   var dir;
-  var pkg;
   var path;
+  var pkg;
 
   var manifestExists = false;
 
   try {
     dir = context ? context.opts.projectRoot : process.cwd();
-    pkg = require(dir + '/package.json');
+    pkg = semver.parse(require(dir + '/package.json').version);
     path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
