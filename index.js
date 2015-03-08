@@ -17,7 +17,7 @@ module.exports = function (context) {
   var manifestExists = false;
 
   try {
-    dir = context ? context.opts.projectRoot : __dirname;
+    dir = context ? context.opts.projectRoot : process.cwd();
     path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
