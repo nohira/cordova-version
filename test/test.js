@@ -3,8 +3,10 @@ var assert = require('assert');
 var cordovaVersion = require('../');
 
 describe('cordova-version node module', function () {
-  it('must have at least one test', function () {
-    cordovaVersion();
-    assert(false, 'I was too lazy to write any tests. Shame on me.');
+  it('must return a promise', function() {
+    var cdv = cordovaVersion();
+    assert(typeof cdv.then === 'function', 'Return value is not thenable');
+    assert(typeof cdv.done === 'function', 'Return value has no done method');
+    assert(typeof cdv.catch === 'function', 'Return value has no catch method');
   });
 });

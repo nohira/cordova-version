@@ -1,31 +1,40 @@
-#  [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+#  [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Build Status][travis-image]][travis-url] [![Code Climate][cc-image]][cc-url]
 
 > Sets config.xml version and build number from package.json
 
-
 ## Install
-
 ```sh
-$ npm install --save cordova-version
+$ npm install --save-dev cordova-version
 ```
-
 
 ## Usage
+### Hook
+```javascript
+// my-version-hook.js
+var version = require('cordova-version');
 
-```js
-var cordovaVersion = require('cordova-version');
-
-cordovaVersion('Rainbow');
+module.exports = function(context) {
+  return version.update();
+};
 ```
 
+```xml
+<!-- config.xml -->
+<hook src="my-version-hook.js" type="before_prepare" />
+```
+
+### Manual
 ```sh
 $ npm install --global cordova-version
 $ cordova-version --help
 ```
 
+## Requirements
+- [Semantic Versioning](http://semver.org/) version and build number
+- Cordova's config.xml file must exist in the root folder
+
 
 ## License
-
 MIT © [Carlos Antonio](http://carlosanton.io/)
 
 
@@ -35,3 +44,6 @@ MIT © [Carlos Antonio](http://carlosanton.io/)
 [travis-url]: https://travis-ci.org/disusered/cordova-version
 [daviddm-image]: https://david-dm.org/disusered/cordova-version.svg?theme=shields.io
 [daviddm-url]: https://david-dm.org/disusered/cordova-version
+[cc-image]: https://codeclimate.com/github/disusered/cordova-version/badges/gpa.svg
+[cc-url]: https://codeclimate.com/github/disusered/cordova-version
+
