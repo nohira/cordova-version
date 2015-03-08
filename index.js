@@ -21,7 +21,7 @@ module.exports = function (context) {
     path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
-    dfd.reject();
+    dfd.reject('Unable to find config.xml in path');
   }
 
   if (manifestExists) {
@@ -31,26 +31,23 @@ module.exports = function (context) {
 
         function callback(err) {
           if (err) {
-            console.log(err);
-            dfd.reject();
+            dfd.reject('Error writing to config.xml');
           } else {
-            console.log('Updating "com.disusered.stetho" AndroidManifest.xml');
-            dfd.resolve();
+            dfd.resolve('Updated config.xml successfully');
           }
         }
 
         try {
           // TODO: update config.xml
-          console.log(modified);
           output = builder.buildObject(modified);
           fs.writeFile(path, output, callback);
         } catch (error) {
-          dfd.reject();
+          dfd.reject('Error writing to config.xml');
         }
       });
     });
   } else {
-    dfd.reject();
+    dfd.reject('Unable to find config.xml in path');
   }
 
   return dfd.promise;

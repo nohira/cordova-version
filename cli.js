@@ -14,4 +14,10 @@ var cli = meow({
   ].join('\n')
 });
 
-cordovaVersion(cli.input[0]);
+cordovaVersion(cli.input[0])
+  .then(function(message) {
+    process.stdout.write(message);
+  })
+  .catch(function(error) {
+    process.stderr.write(error);
+  });
