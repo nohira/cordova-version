@@ -1,6 +1,6 @@
 {
   "name": "cordova-version",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Sets config.xml version and build number from package.json",
   "homepage": "https://github.com/disusered/cordova-version",
   "author": {
