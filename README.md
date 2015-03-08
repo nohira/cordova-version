@@ -13,7 +13,7 @@ $ npm install --save-dev cordova-version
 // my-version-hook.js
 var version = require('cordova-version');
 
-module.exports = function(context) {
+module.exports = function() {
   return version.update();
 };
 ```
