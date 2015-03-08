@@ -2,20 +2,23 @@
 
 var fs     = require('fs');
 var xml2js = require('xml2js');
+var npmQ   = require('q');
 
 module.exports = function (context) {
-  var Q       = context.requireCordovaModule('q');
+  var Q = context ? context.requireCordovaModule('q') : npmQ;
   var dfd     = new Q.defer();
   var parser  = new xml2js.Parser();
   var builder = new xml2js.Builder();
 
   var output;
+  var dir;
   var path;
 
   var manifestExists = false;
 
   try {
-    path = context.opts.projectRoot + '/config.xml';
+    dir = context ? context.opts.projectRoot : __dirname;
+    path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
     dfd.reject();
@@ -38,6 +41,7 @@ module.exports = function (context) {
 
         try {
           // TODO: update config.xml
+          console.log(modified);
           output = builder.buildObject(modified);
           fs.writeFile(path, output, callback);
         } catch (error) {
