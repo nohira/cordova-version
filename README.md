@@ -14,15 +14,7 @@ $ npm install --save-dev cordova-version
 var version = require('cordova-version');
 
 module.exports = function(context) {
-  var Q   = context.requireCordovaModule('q');
-  var dfd = new Q.defer();
-
-  version().then(function() {
-    dfd.resolve();
-    console.log('Version and build number updated.');
-  });
-
-  return dfd.promise;
+  return version.update();
 };
 ```
 
