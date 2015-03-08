@@ -12,12 +12,14 @@ module.exports = function (context) {
 
   var output;
   var dir;
+  var pkg;
   var path;
 
   var manifestExists = false;
 
   try {
     dir = context ? context.opts.projectRoot : process.cwd();
+    pkg = require(dir + '/package.json');
     path = dir + '/config.xml';
     manifestExists = fs.existsSync(path);
   } catch (error) {
@@ -38,7 +40,8 @@ module.exports = function (context) {
         }
 
         try {
-          // TODO: update config.xml
+          modified.widget.$['version'] = pkg.version;
+
           output = builder.buildObject(modified);
           fs.writeFile(path, output, callback);
         } catch (error) {
