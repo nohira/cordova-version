@@ -5,7 +5,7 @@ var xml2js = require('xml2js');
 var npmQ   = require('q');
 var semver = require('semver-utils');
 
-module.exports = function (context) {
+function updateVersion(context) {
   var Q = context ? context.requireCordovaModule('q') : npmQ;
   var dfd     = new Q.defer();
   var parser  = new xml2js.Parser();
@@ -62,4 +62,8 @@ module.exports = function (context) {
   }
 
   return dfd.promise;
+}
+
+module.exports = {
+  update: updateVersion
 };
