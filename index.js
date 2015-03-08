@@ -31,6 +31,7 @@ module.exports = function (context) {
     fs.readFile(path, function(err, data) {
       parser.parseString(data, function(err, result) {
         var modified = result;
+        var build;
 
         function callback(err) {
           if (err) {
@@ -44,8 +45,9 @@ module.exports = function (context) {
           modified.widget.$['version'] = pkg.version;
 
           if (pkg.build) {
-            modified.widget.$['android-versionCode'] = pkg.build;
-            modified.widget.$['ios-CFBundleVersion'] = pkg.build;
+            build = pkg.build.replace(/\D/g,'');
+            modified.widget.$['android-versionCode'] = build;
+            modified.widget.$['ios-CFBundleVersion'] = build;
           }
 
           output = builder.buildObject(modified);
